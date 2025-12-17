@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy in the Classroom: Best Practice Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; color: #1F2937; }
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; height: 300px; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; }
+        
+        /* Traffic Light Glow Effects */
+        .glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+        .glow-amber { box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
+        .glow-green { box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+        
+        .tab-active { border-bottom: 3px solid #3B82F6; color: #1D4ED8; font-weight: 600; }
+        .tab-inactive { border-bottom: 3px solid transparent; color: #6B7280; }
+        .tab-inactive:hover { color: #374151; border-bottom-color: #D1D5DB; }
+    </style>
+    <!-- Chosen Palette: Professional Education Theme -->
+    <!-- Background: Cool Gray (#F3F4F6) -->
+    <!-- Primary Text: Dark Gray (#1F2937) -->
+    <!-- Interactive Colors: Traffic Lights (Red #EF4444, Amber #F59E0B, Green #10B981) -->
+    <!-- Accent: Royal Blue (#3B82F6) for navigation and headers. -->
+
+    <!-- Application Structure Plan: 
+         1. **Header**: Title and simple navigation to switch between Student View and Staff View.
+         2. **Vision Section**: Brief intro to the "Consumers -> Critics -> Creators" philosophy.
+         3. **Traffic Light Protocol (Interactive Module)**: 
+            - A clickable dashboard where users select a task (e.g., "Exams", "Brainstorming").
+            - The UI lights up the corresponding Traffic Light signal with the specific rule and student action.
+            - Justification: This translates the abstract rules into concrete, memorable scenarios.
+         4. **Progression Pathway**: A tabbed view for KS1, KS2, and KS3 showing the evolution of student roles and classroom vibes.
+         5. **Universal Rules (The 'AI 4')**: A grid of cards explaining the 4 ethical pillars.
+         6. **Staff Room (Teacher Specific)**:
+            - Visualization of the 80/20 Rule using a Pie Chart.
+            - Checklist for Data Privacy and "Critical Literacy" modeling.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. **80/20 Rule Pie Chart (Chart.js)**:
+            - Goal: Inform staff about the ideal curriculum balance.
+            - Viz: Doughnut chart showing 80% Human Skills vs 20% AI Amplification.
+            - Justification: Visual representation makes the "balance" concept easier to digest than text.
+         2. **Traffic Light Simulator (HTML/JS)**:
+            - Goal: Clarify permission levels.
+            - Interaction: Click task -> Reveal Light + Rule.
+            - Justification: Active learning; students test their understanding of the rules.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-gray-900">AI in the Classroom</span>
+                    <span class="ml-3 px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full hidden sm:inline-block">Best Practice Guide</span>
+                </div>
+                <div class="flex space-x-8">
+                    <button onclick="switchTab('students')" id="nav-students" class="tab-active inline-flex items-center px-1 pt-1 text-sm font-medium">Student Zone</button>
+                    <button onclick="switchTab('staff')" id="nav-staff" class="tab-inactive inline-flex items-center px-1 pt-1 text-sm font-medium">Staff Room</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- CORE VISION (Always Visible) -->
+        <section class="mb-12 text-center max-w-3xl mx-auto">
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-4">From Consumers to Critics to Creators</h1>
+            <p class="text-lg text-gray-600">
+                In this school, AI is a <strong>tool</strong>, not a replacement for thinking. We follow the <strong>Human-in-the-Loop</strong> principle: 
+                <span class="font-semibold text-blue-700 italic">"A human must always set the goal, check the work, and take responsibility."</span>
+            </p>
+        </section>
+
+        <!-- STUDENT ZONE VIEW -->
+        <div id="view-students" class="space-y-12 animate-fade-in">
+            
+            <!-- 1. TRAFFIC LIGHT PROTOCOL -->
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6 border-b border-gray-100 bg-gray-50">
+                    <h2 class="text-xl font-bold text-gray-900">🚦 The Traffic Light Protocol</h2>
+                    <p class="text-sm text-gray-500 mt-1">Not sure if you can use AI? Click a task below to see the rule.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 p-6 gap-8">
+                    <!-- Interaction Panel -->
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3">Select a Task</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="setTrafficLight('exam')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">📝 Taking an Exam</button>
+                            <button onclick="setTrafficLight('ideas')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">💡 Brainstorming Story Ideas</button>
+                            <button onclick="setTrafficLight('code')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">💻 Generating Python Code</button>
+                            <button onclick="setTrafficLight('essay')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">✍️ In-Class Essay</button>
+                            <button onclick="setTrafficLight('summary')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">📚 Summarizing a Long Article</button>
+                            <button onclick="setTrafficLight('math')" class="text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium transition-colors focus:ring-2 focus:ring-blue-500">➗ Mental Maths</button>
+                        </div>
+                    </div>
+
+                    <!-- Display Panel -->
+                    <div class="bg-slate-900 rounded-xl p-6 flex flex-col items-center justify-center text-center relative min-h-[300px]">
+                        <!-- Lights -->
+                        <div class="flex space-x-6 mb-6">
+                            <div id="light-red" class="w-12 h-12 rounded-full bg-red-900 border-4 border-red-900 transition-all duration-300"></div>
+                            <div id="light-amber" class="w-12 h-12 rounded-full bg-yellow-900 border-4 border-yellow-900 transition-all duration-300"></div>
+                            <div id="light-green" class="w-12 h-12 rounded-full bg-green-900 border-4 border-green-900 transition-all duration-300"></div>
+                        </div>
+                        
+                        <!-- Text Output -->
+                        <div id="traffic-text-container" class="transition-opacity duration-300">
+                            <h3 id="traffic-title" class="text-2xl font-bold text-white mb-2">Select a Task</h3>
+                            <p id="traffic-status" class="text-sm font-mono text-gray-400 uppercase mb-4">Status: Waiting...</p>
+                            <div id="traffic-rule" class="bg-gray-800 rounded-lg p-4 text-left text-gray-300 text-sm border-l-4 border-gray-600">
+                                Click a button on the left to see if AI is allowed.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. THE UNIVERSAL RULES (AI 4) -->
+            <section>
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900">The "AI 4": Universal Rules</h2>
+                    <p class="text-gray-500">Consistent expectations for every student, every day.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Rule 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500 hover:shadow-md transition-shadow">
+                        <div class="text-3xl mb-4">🕵️‍♂️</div>
+                        <h3 class="font-bold text-lg text-gray-900">Be a Detective</h3>
+                        <p class="text-sm text-gray-600 mt-2">Never trust AI blindly. If it looks wrong, check a book. AI hallucinates.</p>
+                    </div>
+                    <!-- Rule 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500 hover:shadow-md transition-shadow">
+                        <div class="text-3xl mb-4">🤝</div>
+                        <h3 class="font-bold text-lg text-gray-900">Be Honest</h3>
+                        <p class="text-sm text-gray-600 mt-2">If you used AI, admit it. Don't pretend a robot's work is yours.</p>
+                    </div>
+                    <!-- Rule 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500 hover:shadow-md transition-shadow">
+                        <div class="text-3xl mb-4">🔒</div>
+                        <h3 class="font-bold text-lg text-gray-900">Stay Private</h3>
+                        <p class="text-sm text-gray-600 mt-2">Never type your name, address, or photos into a chatbot. Protect your data.</p>
+                    </div>
+                    <!-- Rule 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500 hover:shadow-md transition-shadow">
+                        <div class="text-3xl mb-4">❤️</div>
+                        <h3 class="font-bold text-lg text-gray-900">Be Kind</h3>
+                        <p class="text-sm text-gray-600 mt-2">Never use AI to create mean images or deepfakes of others.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. PROGRESSION BY KEY STAGE -->
+            <section class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Your Role by Year Group</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- KS1 -->
+                    <div class="bg-white rounded-xl p-6 border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded">KS1 (Y1-2)</span>
+                            <span class="text-2xl">🔭</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-900">The Explorer</h3>
+                        <p class="text-sm text-gray-500 italic mb-4">"I watch and wonder."</p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li>• Use physical toys (BeeBots).</li>
+                            <li>• Watch teacher demos.</li>
+                            <li>• Ask: "Is this a person or a machine?"</li>
+                        </ul>
+                    </div>
+
+                    <!-- KS2 -->
+                    <div class="bg-white rounded-xl p-6 border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded">KS2 (Y3-6)</span>
+                            <span class="text-2xl">✈️</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-900">The Co-Pilot</h3>
+                        <p class="text-sm text-gray-500 italic mb-4">"I prompt and check."</p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li>• Use block coding & Teachable Machine.</li>
+                            <li>• Work in pairs to audit answers.</li>
+                            <li>• Ask: "Is the data biased?"</li>
+                        </ul>
+                    </div>
+
+                    <!-- KS3 -->
+                    <div class="bg-white rounded-xl p-6 border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded">KS3 (Y7-9)</span>
+                            <span class="text-2xl">🏗️</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-900">The Architect</h3>
+                        <p class="text-sm text-gray-500 italic mb-4">"I build and evaluate."</p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li>• Use Python & LLMs for research.</li>
+                            <li>• Debate implications.</li>
+                            <li>• Ask: "What is the environmental cost?"</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- STAFF ROOM VIEW -->
+        <div id="view-staff" class="hidden space-y-12 animate-fade-in">
+            <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-6 flex items-start gap-4">
+                <div class="text-3xl">👩‍🏫</div>
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-900">Staff Guidelines</h2>
+                    <p class="text-indigo-700 text-sm mt-1">Consistency is key. Do not hide the tool—model critical literacy and ethical use explicitly.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- 80/20 Rule Visualization -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">The 80/20 Rule</h3>
+                    <p class="text-sm text-gray-500 mb-6">Aim for a curriculum balance where AI leverages, rather than replaces, fundamental skills.</p>
+                    <div class="chart-container">
+                        <canvas id="balanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Implementation Checklist -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Implementation Checklist</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">✓</span>
+                                <div>
+                                    <strong class="text-sm text-gray-900">Don't Ban, Modify</strong>
+                                    <p class="text-sm text-gray-600">If AI can solve the homework, change the homework. Focus on process and viva voce.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">✓</span>
+                                <div>
+                                    <strong class="text-sm text-gray-900">Model Critical Literacy</strong>
+                                    <p class="text-sm text-gray-600">Deliberately critique AI output in front of class. "Look, this fact is out of date."</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">✓</span>
+                                <div>
+                                    <strong class="text-sm text-gray-900">Data Privacy</strong>
+                                    <p class="text-sm text-gray-600">KS1/2: No personal logins. KS3: Parental consent required for personal accounts.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Teaching Tip -->
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <h4 class="text-sm font-bold text-blue-800">💡 Best Practice: The "Sandwich Method"</h4>
+                        <p class="text-xs text-blue-700 mt-2">
+                            1. **Human Draft:** Student writes initial thoughts.<br>
+                            2. **AI Feedback:** Student asks AI for critique.<br>
+                            3. **Human Edit:** Student improves work based on feedback.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-400">
+            <p>&copy; 2025 AI Literacy Framework • Whole School Policy</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- TRAFFIC LIGHT LOGIC ---
+        const trafficData = {
+            exam: { color: 'red', title: 'RED LIGHT: "Me, Myself, and I"', status: 'PROHIBITED', rule: 'Assessing core knowledge. No digital assistants. Just your brain.' },
+            essay: { color: 'red', title: 'RED LIGHT: "Me, Myself, and I"', status: 'PROHIBITED', rule: 'In-class essays assess your critical thinking. No AI allowed.' },
+            math: { color: 'red', title: 'RED LIGHT: "Me, Myself, and I"', status: 'PROHIBITED', rule: 'Mental maths requires cognitive fluency. Put the tech away.' },
+            
+            ideas: { color: 'amber', title: 'AMBER LIGHT: "AI as a Coach"', status: 'LIMITED / SCAFFOLDING', rule: 'You may use AI to generate ideas, but the final output must be yours. No copy-pasting.' },
+            code: { color: 'amber', title: 'AMBER LIGHT: "AI as a Coach"', status: 'LIMITED / SCAFFOLDING', rule: 'Use AI to check your code for errors or explain a bug, but don\'t let it write the whole script.' },
+            
+            script: { color: 'green', title: 'GREEN LIGHT: "AI as Co-Pilot"', status: 'ALLOWED (With Citation)', rule: 'You may use AI to generate the script, but you must CITE it and VERIFY it.' },
+            summary: { color: 'green', title: 'GREEN LIGHT: "AI as Co-Pilot"', status: 'ALLOWED (With Citation)', rule: 'You can use AI to summarize long articles for research. Remember to check for truth.' }
+        };
+
+        // Note: I mapped 'code' to amber in data but in UI button labeled it "Generating Python Code" which might imply Green based on prompt text "Generating Python scripts". 
+        // Let's align exactly with source: "Generating Python scripts" is GREEN. "Check my code" is AMBER.
+        // I will update the logic below to handle specific button clicks accurately.
+
+        function setTrafficLight(task) {
+            let data;
+            
+            // Map tasks to source logic
+            if (task === 'exam' || task === 'essay' || task === 'math') {
+                data = trafficData.exam; // Red
+            } else if (task === 'ideas') {
+                data = trafficData.ideas; // Amber
+            } else if (task === 'code') {
+                 // Source says "Generating Python scripts" is Green
+                data = { color: 'green', title: 'GREEN LIGHT: "AI as Co-Pilot"', status: 'ALLOWED (With Citation)', rule: 'You may use AI to generate content (like Python scripts), but you must CITE it and VERIFY it.' };
+            } else if (task === 'summary') {
+                data = trafficData.summary; // Green
+            }
+
+            // Reset Lights
+            document.getElementById('light-red').className = "w-12 h-12 rounded-full bg-red-900 border-4 border-red-900 transition-all duration-300";
+            document.getElementById('light-amber').className = "w-12 h-12 rounded-full bg-yellow-900 border-4 border-yellow-900 transition-all duration-300";
+            document.getElementById('light-green').className = "w-12 h-12 rounded-full bg-green-900 border-4 border-green-900 transition-all duration-300";
+
+            // Activate Light
+            if (data.color === 'red') {
+                document.getElementById('light-red').className = "w-12 h-12 rounded-full bg-red-500 border-4 border-red-600 glow-red transition-all duration-300 transform scale-110";
+            } else if (data.color === 'amber') {
+                document.getElementById('light-amber').className = "w-12 h-12 rounded-full bg-amber-400 border-4 border-amber-500 glow-amber transition-all duration-300 transform scale-110";
+            } else {
+                document.getElementById('light-green').className = "w-12 h-12 rounded-full bg-emerald-400 border-4 border-emerald-500 glow-green transition-all duration-300 transform scale-110";
+            }
+
+            // Update Text
+            const container = document.getElementById('traffic-text-container');
+            container.style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('traffic-title').innerText = data.title;
+                document.getElementById('traffic-status').innerText = data.status;
+                document.getElementById('traffic-status').className = `text-sm font-mono uppercase mb-4 font-bold ${data.color === 'red' ? 'text-red-400' : data.color === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`;
+                document.getElementById('traffic-rule').innerText = data.rule;
+                document.getElementById('traffic-rule').className = `bg-gray-800 rounded-lg p-4 text-left text-gray-300 text-sm border-l-4 ${data.color === 'red' ? 'border-red-500' : data.color === 'amber' ? 'border-amber-500' : 'border-emerald-500'}`;
+                container.style.opacity = '1';
+            }, 150);
+        }
+
+        // --- TAB SWITCHING ---
+        function switchTab(view) {
+            const views = ['students', 'staff'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                const btn = document.getElementById(`nav-${v}`);
+                if (v === view) {
+                    el.classList.remove('hidden');
+                    btn.className = "tab-active inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors";
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = "tab-inactive inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors";
+                }
+            });
+
+            if (view === 'staff') {
+                renderChart();
+            }
+        }
+
+        // --- CHART ---
+        let chartInstance = null;
+        function renderChart() {
+            if (chartInstance) return; // Only render once
+
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Human Skills (Logic, Empathy)', 'AI Amplification'],
+                    datasets: [{
+                        data: [80, 20],
+                        backgroundColor: ['#3B82F6', '#10B981'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, font: { family: "'Inter', sans-serif" } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '75%'
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
