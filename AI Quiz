@@ -1,0 +1,476 @@
+<!-- Navigation -->
+<nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center">
+                <span class="text-2xl mr-2">🧠</span>
+                <span class="font-bold text-xl tracking-tight text-stone-800">HPL <span class="text-stone-400">|</span> AI Literacy</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
+                <a href="#matrix" class="hover:text-stone-900 transition">The Matrix</a>
+                <a href="#skills" class="hover:text-stone-900 transition">Skill Explorer</a>
+                <a href="#toolkit" class="hover:text-stone-900 transition">Parent Toolkit</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="bg-stone-100 py-12 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-stone-900 mb-6">Future-Proofing Your Child</h1>
+        <p class="text-xl text-stone-600 mb-8 max-w-2xl mx-auto">
+            Navigating the world of Artificial Intelligence isn't just about technology—it's about thinking. Explore how the <strong>High Performance Learning (HPL)</strong> framework empowers your child to master the machine.
+        </p>
+        <div class="inline-block bg-white px-6 py-3 rounded-full shadow-sm border border-stone-200 text-sm font-semibold text-stone-700">
+            "The most powerful computer in the room is still the one in your child's head."
+        </div>
+    </div>
+</header>
+
+<!-- Main Content Container -->
+<main class="max-w-6xl mx-auto px-4 py-12 space-y-24">
+
+    <!-- Section 1: The HPL x AI Matrix -->
+    <section id="matrix" class="scroll-mt-24">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold mb-4">The HPL Advantage</h2>
+            <p class="text-stone-600 max-w-2xl mx-auto">
+                Why do we use HPL? Because "user" skills aren't enough. We need "thinker" skills. This visualization compares a passive technology user with an HPL-empowered learner across 6 key dimensions.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            <!-- Chart Column -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                <div class="chart-container">
+                    <canvas id="hplRadarChart"></canvas>
+                </div>
+                <div class="mt-4 text-center text-xs text-stone-400">
+                    *Hypothetical profile comparison based on HPL Handbook principles
+                </div>
+            </div>
+
+            <!-- Context Column -->
+            <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 h-full flex flex-col justify-center">
+                <h3 class="text-lg font-bold mb-4 text-stone-800">Reading the Chart</h3>
+                <ul class="space-y-4 text-sm text-stone-700">
+                    <li class="flex items-start">
+                        <span class="text-sky-500 font-bold mr-2">Blue Area:</span>
+                        <span>The <strong>HPL Learner</strong>. They use advanced thinking (ACPs) and strong character (VAAs) to question, verify, and ethically use AI.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-stone-400 font-bold mr-2">Grey Area:</span>
+                        <span>The <strong>Passive User</strong>. They might know how to open the app, but they accept the output without questioning or refining it.</span>
+                    </li>
+                </ul>
+                <div class="mt-8 p-4 bg-sky-50 rounded-lg border border-sky-100">
+                    <p class="text-sky-800 text-sm font-semibold">Goal: Expand the Blue Area</p>
+                    <p class="text-sky-700 text-xs mt-1">Our curriculum is designed to push your child's capabilities from the center outward.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Skill Explorer -->
+    <section id="skills" class="scroll-mt-24">
+        <div class="mb-10">
+            <h2 class="text-3xl font-bold mb-4">Thinking & Character Skills</h2>
+            <p class="text-stone-600 max-w-3xl">
+                HPL divides learning into <strong>ACPs</strong> (How we think) and <strong>VAAs</strong> (How we behave). Click on the cards below to see how each specific skill applies to AI Literacy.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Menu Column -->
+            <div class="lg:col-span-4 space-y-3">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-stone-400 uppercase tracking-wider">ACPs (Thinking)</span>
+                </div>
+                <!-- Generated by JS -->
+                <div id="acpList" class="space-y-2"></div>
+
+                <div class="flex items-center justify-between mb-2 mt-6">
+                    <span class="text-xs font-bold text-stone-400 uppercase tracking-wider">VAAs (Behavior)</span>
+                </div>
+                <!-- Generated by JS -->
+                <div id="vaaList" class="space-y-2"></div>
+            </div>
+
+            <!-- Content Display Column -->
+            <div class="lg:col-span-8">
+                <div id="skillDisplay" class="bg-white p-8 rounded-2xl shadow-lg border border-stone-100 h-full flex flex-col justify-center min-h-[400px] transition-all duration-300">
+                    <!-- Dynamic Content loads here -->
+                    <div class="text-center text-stone-400">
+                        <p class="text-4xl mb-4">👆</p>
+                        <p>Select a skill from the list to explore.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Parent Toolkit (Interactive Scenario) -->
+    <section id="toolkit" class="scroll-mt-24 mb-20">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold mb-4">Parent Toolkit Simulator</h2>
+            <p class="text-stone-600 max-w-2xl mx-auto">
+                How can you support this at home? Test your "Parenting for AI" instincts in these common scenarios.
+            </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-200">
+            <!-- Progress Bar -->
+            <div class="w-full bg-stone-100 h-2">
+                <div id="progressBar" class="bg-amber-500 h-2 transition-all duration-500" style="width: 0%"></div>
+            </div>
+
+            <div class="p-8 sm:p-12">
+                <div id="scenarioContainer" class="fade-in">
+                    <!-- Dynamic Scenario Content -->
+                </div>
+            </div>
+            
+            <div class="bg-stone-50 px-8 py-4 border-t border-stone-100 flex justify-between items-center text-sm text-stone-500">
+                <span id="scenarioCount">Scenario 1 of 3</span>
+                <button onclick="resetScenarios()" class="text-stone-400 hover:text-stone-900 underline">Reset</button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-stone-900 text-stone-400 py-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+        <h3 class="text-white text-xl font-bold mb-4 font-serif">Together, we build learners ready for anything.</h3>
+        <p class="mb-8">Based on the High Performance Learning framework and the AI Literacy Curriculum.</p>
+        <div class="flex justify-center space-x-6 text-2xl">
+            <span>🧠</span>
+            <span>❤️</span>
+            <span>🤖</span>
+        </div>
+        <p class="mt-8 text-xs text-stone-600">&copy; 2024 AI Literacy Initiative</p>
+    </div>
+</footer>
+
+<!-- JavaScript Logic -->
+<script>
+    // --- Data: HPL Skills ---
+    const skillsData = {
+        acps: [
+            {
+                id: 'meta',
+                name: 'Meta-Thinking',
+                icon: '🧠',
+                hplDef: 'Monitoring, regulating, and planning your own thinking. The "Boss of the Brain".',
+                aiApp: 'Knowing WHEN to use AI. Asking: "Should I use ChatGPT for this essay, or will that stop me from learning to write?" It is about strategy, not just execution.'
+            },
+            {
+                id: 'critical',
+                name: 'Critical Thinking',
+                icon: '🕵️',
+                hplDef: 'The ability to analyze complex ideas, arguments, and evidence logically.',
+                aiApp: 'Detecting "Hallucinations" and bias. When an AI gives an answer, the critical thinker asks: "Is this true? Who trained this model? Is this video a deepfake?"'
+            },
+            {
+                id: 'linking',
+                name: 'Linking',
+                icon: '🔗',
+                hplDef: 'Seeing connections between different things and understanding the "big picture".',
+                aiApp: 'Understanding Algorithms. Linking your own data (what you click) to the output (what Netflix suggests). Understanding that "Garbage In = Garbage Out".'
+            }
+        ],
+        vaas: [
+            {
+                id: 'agility',
+                name: 'Agility',
+                icon: '🤸',
+                hplDef: 'Being open-minded, enquiring, and creative. Adapting to new situations.',
+                aiApp: 'Prompt Engineering requires agility. If the AI gives a bad answer, the agile learner doesn\'t give up—they change the prompt (iteration) and try a new approach.'
+            },
+            {
+                id: 'empathy',
+                name: 'Empathy',
+                icon: '❤️',
+                hplDef: 'Being collaborative and concerned for society. Understanding others.',
+                aiApp: 'AI Ethics. Asking: "Is this technology fair to everyone?" Understanding that AI has no feelings, so we must supply the humanity.'
+            },
+            {
+                id: 'hardwork',
+                name: 'Hard Work',
+                icon: '⚙️',
+                hplDef: 'Resilience and perseverance. The engine of success.',
+                aiApp: 'Learning to code or master a complex tool takes practice. It requires the resilience to debug errors and the patience to train models.'
+            }
+        ]
+    };
+
+    // --- Data: Scenarios ---
+    const scenarios = [
+        {
+            question: "Your child asks: 'Why is the sky blue?' and immediately reaches for the iPad to ask Siri.",
+            options: [
+                {
+                    text: "Let them ask Siri immediately.",
+                    feedback: "Not quite. While fast, this skips the thinking process.",
+                    isCorrect: false
+                },
+                {
+                    text: "Say: 'What do you think first? Use your brain before the digital brain.'",
+                    feedback: "Perfect! This encourages Meta-Thinking. The AI is a tool to check thinking, not replace it.",
+                    isCorrect: true
+                }
+            ]
+        },
+        {
+            question: "You see your child watching a video that looks very strange and unbelievable.",
+            options: [
+                {
+                    text: "Turn it into a game: 'Let's play Detective. How can we check if this is real?'",
+                    feedback: "Excellent! This models Critical Thinking and turns skepticism into a habit.",
+                    isCorrect: true
+                },
+                {
+                    text: "Tell them to turn it off immediately.",
+                    feedback: "This stops the viewing, but misses a teaching moment about deepfakes and misinformation.",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            question: "Your child is frustrated because the AI art generator isn't making the picture they want.",
+            options: [
+                {
+                    text: "Do it for them.",
+                    feedback: "This solves the problem but prevents learning.",
+                    isCorrect: false
+                },
+                {
+                    text: "Encourage Agility: 'Try using different words. How can we say this differently?'",
+                    feedback: "Spot on! This teaches iteration and resilience (Hard Work) in prompt engineering.",
+                    isCorrect: true
+                }
+            ]
+        }
+    ];
+
+    // --- State Management ---
+    let currentScenarioIndex = 0;
+    let selectedSkillId = null;
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderChart();
+        renderSkillList();
+        // Load first scenario
+        renderScenario(0);
+        // Select first skill by default
+        selectSkill('meta', 'acps');
+    });
+
+    // --- Chart Logic ---
+    function renderChart() {
+        const ctx = document.getElementById('hplRadarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Meta-Thinking', 'Critical Thinking', 'Linking', 'Agility', 'Empathy', 'Hard Work'],
+                datasets: [{
+                    label: 'HPL Empowered Learner',
+                    data: [90, 85, 80, 90, 95, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(14, 165, 233, 0.2)', // Sky-500
+                    borderColor: 'rgba(14, 165, 233, 1)',
+                    pointBackgroundColor: 'rgba(14, 165, 233, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
+                }, {
+                    label: 'Passive User',
+                    data: [20, 30, 40, 50, 40, 40],
+                    fill: true,
+                    backgroundColor: 'rgba(168, 162, 158, 0.2)', // Stone-400
+                    borderColor: 'rgba(168, 162, 158, 1)',
+                    pointBackgroundColor: 'rgba(168, 162, 158, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(168, 162, 158, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: { borderWidth: 3 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false } // Hide numbers for cleaner look
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    // --- Skill Explorer Logic ---
+    function renderSkillList() {
+        const acpContainer = document.getElementById('acpList');
+        const vaaContainer = document.getElementById('vaaList');
+
+        // Render ACPs
+        skillsData.acps.forEach(skill => {
+            acpContainer.appendChild(createSkillButton(skill, 'acps'));
+        });
+
+        // Render VAAs
+        skillsData.vaas.forEach(skill => {
+            vaaContainer.appendChild(createSkillButton(skill, 'vaas'));
+        });
+    }
+
+    function createSkillButton(skill, type) {
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-100 transition flex items-center group skill-btn-${skill.id}`;
+        btn.onclick = () => selectSkill(skill.id, type);
+        btn.innerHTML = `
+            <span class="mr-3 text-lg group-hover:scale-110 transition-transform">${skill.icon}</span>
+            ${skill.name}
+        `;
+        return btn;
+    }
+
+    function selectSkill(id, type) {
+        // Remove active classes
+        document.querySelectorAll('[class*="skill-btn-"]').forEach(el => {
+            el.classList.remove('card-active', 'text-stone-900', 'bg-stone-50');
+            el.classList.add('text-stone-600');
+        });
+
+        // Add active class to selected
+        const activeBtn = document.querySelector(`.skill-btn-${id}`);
+        if (activeBtn) {
+            activeBtn.classList.add('card-active', 'text-stone-900', 'bg-stone-50');
+            activeBtn.classList.remove('text-stone-600');
+        }
+
+        // Update Display
+        const skill = skillsData[type].find(s => s.id === id);
+        const display = document.getElementById('skillDisplay');
+        
+        // Fade out, update, fade in
+        display.classList.remove('fade-in');
+        void display.offsetWidth; // trigger reflow
+        
+        display.innerHTML = `
+            <div class="fade-in">
+                <div class="flex items-center mb-6">
+                    <div class="text-6xl mr-6 bg-stone-50 p-4 rounded-2xl">${skill.icon}</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-stone-900">${skill.name}</h3>
+                        <span class="inline-block px-3 py-1 bg-stone-100 text-stone-500 text-xs font-bold uppercase tracking-wide rounded-full mt-2">
+                            ${type === 'acps' ? 'Thinking Skill' : 'Character Attribute'}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">HPL Definition</h4>
+                        <p class="text-lg text-stone-800 leading-relaxed">${skill.hplDef}</p>
+                    </div>
+                    
+                    <div class="bg-sky-50 p-6 rounded-xl border border-sky-100">
+                        <h4 class="text-sm font-bold text-sky-600 uppercase tracking-wider mb-2">AI Literacy Application</h4>
+                        <p class="text-sky-900 leading-relaxed">${skill.aiApp}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        display.classList.add('fade-in');
+    }
+
+    // --- Scenario Logic ---
+    function renderScenario(index) {
+        if (index >= scenarios.length) {
+            showCompletion();
+            return;
+        }
+
+        const scenario = scenarios[index];
+        const container = document.getElementById('scenarioContainer');
+        const progress = document.getElementById('progressBar');
+        const counter = document.getElementById('scenarioCount');
+
+        // Update UI
+        progress.style.width = `${((index) / scenarios.length) * 100}%`;
+        counter.innerText = `Scenario ${index + 1} of ${scenarios.length}`;
+
+        container.innerHTML = `
+            <h3 class="text-xl font-bold text-stone-900 mb-6">${scenario.question}</h3>
+            <div class="space-y-4">
+                ${scenario.options.map((opt, i) => `
+                    <button onclick="checkAnswer(${index}, ${i})" class="w-full text-left p-4 rounded-xl border-2 border-stone-100 hover:border-stone-300 hover:bg-stone-50 transition group">
+                        <div class="flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-500 flex items-center justify-center mr-4 group-hover:bg-stone-200 font-bold">${String.fromCharCode(65 + i)}</span>
+                            <span class="text-stone-700 font-medium">${opt.text}</span>
+                        </div>
+                    </button>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function checkAnswer(scenarioIndex, optionIndex) {
+        const scenario = scenarios[scenarioIndex];
+        const option = scenario.options[optionIndex];
+        const container = document.getElementById('scenarioContainer');
+
+        const resultColor = option.isCorrect ? 'bg-green-50 border-green-200 text-green-900' : 'bg-amber-50 border-amber-200 text-amber-900';
+        const icon = option.isCorrect ? '✅' : '🤔';
+
+        container.innerHTML = `
+            <div class="text-center py-8 fade-in">
+                <div class="text-6xl mb-4">${icon}</div>
+                <div class="p-6 rounded-xl border ${resultColor} mb-8">
+                    <p class="font-bold text-lg mb-2">${option.isCorrect ? 'Great Choice!' : 'Consider this...'}</p>
+                    <p>${option.feedback}</p>
+                </div>
+                <button onclick="renderScenario(${scenarioIndex + 1})" class="btn-primary px-8 py-3 rounded-full font-bold shadow-lg">
+                    ${scenarioIndex + 1 < scenarios.length ? 'Next Scenario ➝' : 'Finish Simulator ➝'}
+                </button>
+            </div>
+        `;
+        
+        // Update progress bar to completion for this step
+        document.getElementById('progressBar').style.width = `${((scenarioIndex + 1) / scenarios.length) * 100}%`;
+    }
+
+    function showCompletion() {
+        const container = document.getElementById('scenarioContainer');
+        container.innerHTML = `
+            <div class="text-center py-8 fade-in">
+                <div class="text-6xl mb-4">🏆</div>
+                <h3 class="text-2xl font-bold text-stone-900 mb-4">Toolkit Complete!</h3>
+                <p class="text-stone-600 mb-8">You are ready to support your child's AI journey. Remember, the goal isn't to be a tech expert, but to be a guide for their thinking.</p>
+                <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto mb-8 text-center text-sm text-stone-500">
+                    <div class="p-4 bg-stone-50 rounded-lg">Model<br>Thinking</div>
+                    <div class="p-4 bg-stone-50 rounded-lg">Check<br>Facts</div>
+                    <div class="p-4 bg-stone-50 rounded-lg">Show<br>Empathy</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function resetScenarios() {
+        currentScenarioIndex = 0;
+        renderScenario(0);
+    }
+
+</script>
